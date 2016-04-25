@@ -8,7 +8,8 @@ var mongoose  = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/copypasta');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var check = require('./routes/check')
+var check = require('./routes/check');
+var copy = require('./routes/copyNode');
 var app = express();
 
 // view engine setup
@@ -26,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/check',check)
-
+app.use('/copy',copy);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
