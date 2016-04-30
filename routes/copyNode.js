@@ -27,6 +27,7 @@ router.post('/',function(req,res){
     text:req.body.text
   });
   copy.save();
+  
   return res.json({success:true});
 })
 

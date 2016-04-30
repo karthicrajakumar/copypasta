@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Url = require('../app/models/url');
+var User = require('../app/models/user')
 var mongoose = require('mongoose');
 
 
@@ -23,14 +24,27 @@ router.get('/',function(req,res){
 
 router.post('/',function(req,res){
   var url = new Url({
-    url:req.body.url
+    url:req.body.url,
+    id:req.decoded
   });
-  url.save();
-  return res.json({success:true});
-})
-
+  var id = req.decoded;
+  
+  url.save(function(err,doc){
+    User.find({'_id':mongoose.Types.ObjectId(id)},function(err,user){
+      var io = req.io
+      var uname = user[0].username;
+      var sockid = doc.socketid;
+      
+      io.sockets.emit(uname,{result:doc}); // how?
+     
+    });
+      return res.json({success:true});
+    });
+});
 
 router.put('/',function(req,res){
+
+
   var id = req.body.id
   Url.remove({'_id':mongoose.Types.ObjectId(id)},function(err,doc){
     return res.json({success:true});
