@@ -1,4 +1,4 @@
-var express = require('express');
+ var express = require('express');
 var router = express.Router();
 
 var Url = require('../app/models/url');
@@ -28,15 +28,15 @@ router.post('/',function(req,res){
     id:req.decoded
   });
   var id = req.decoded;
-  
+
   url.save(function(err,doc){
     User.find({'_id':mongoose.Types.ObjectId(id)},function(err,user){
       var io = req.io
       var uname = user[0].username;
       var sockid = doc.socketid;
-      
+
       io.sockets.emit(uname,{result:doc}); // how?
-     
+
     });
       return res.json({success:true});
     });
