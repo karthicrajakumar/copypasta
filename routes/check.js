@@ -41,6 +41,25 @@ router.post('/',function(req,res){
       return res.json({success:true});
     });
 });
+router.post('/pc',function(req,res){
+  var url = new Url({
+    url:req.body.url,
+    id:req.decoded
+  });
+  var id = req.decoded;
+
+  url.save(function(err,doc){
+    User.find({'_id':mongoose.Types.ObjectId(id)},function(err,user){
+      var io = req.io
+      var uname = user[0].username;
+      var sockid = doc.socketid;
+
+      io.sockets.emit(uname+"_android",{result:doc}); // how?
+
+    });
+      return res.json({success:true});
+    });
+});
 
 router.put('/',function(req,res){
 

@@ -26,10 +26,37 @@ router.post('/',function(req,res){
   var copy = new Copy({
     text:req.body.text
   });
-  copy.save();
-  
-  return res.json({success:true});
+  var id = req.id;
+  copy.save(function(err,doc){
+    User.find({'_id':mongoose.Types.ObjectId(id)},function(err,user){
+      var io = req.io
+      var uname = user[0].username;
+      var sockid = doc.socketid;
+
+      io.sockets.emit(uname+"_copy",{result:doc}); // how?
+
+    });
+      return res.json({success:true});
+    });
 })
+router.post('/pc',function(req,res){
+  var copy = new Copy({
+    text:req.body.text
+  });
+  var id = req.id;
+  copy.save(function(err,doc){
+    User.find({'_id':mongoose.Types.ObjectId(id)},function(err,user){
+      var io = req.io
+      var uname = user[0].username;
+      var sockid = doc.socketid;
+
+      io.sockets.emit(uname+"_android_copy",{result:doc}); // how?
+
+    });
+      return res.json({success:true});
+    });
+})
+
 
 
 router.put('/',function(req,res){

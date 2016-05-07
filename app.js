@@ -28,11 +28,11 @@ io.on('connection', function (socket) {
     console.log('client connect');
      id = socket.id
      console.log("id"+id)
-      
+
     socket.on('echo', function (data) {
     io.sockets.emit('message', data);
-   
-    
+
+
  });
 });
 app.use(function(req,res,next){
@@ -80,7 +80,7 @@ function authenticate(req,res,next){
 app.use('/', routes);
 app.use('/users', users);
 app.use('/check',authenticate,check)
-app.use('/copy',copy);
+app.use('/copy',authenticate,copy);
 app.use('/test',test)
 app.use('/test1',function (req, res) {
   res.render('test')
