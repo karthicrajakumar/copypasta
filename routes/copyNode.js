@@ -28,7 +28,7 @@ router.post('/',function(req,res){
     text:req.body.text,
     user:req.id
   });
-  var id = req.id;
+  var id = req.decoded;
   copy.save(function(err,doc){
     User.find({'_id':mongoose.Types.ObjectId(id)},function(err,user){
       var io = req.io
@@ -46,7 +46,7 @@ router.post('/pc',function(req,res){
     text:req.body.text,
     user:req.id
   });
-  var id = req.id;
+  var id = req.decoded;
   copy.save(function(err,doc){
     User.find({'_id':mongoose.Types.ObjectId(id)},function(err,user){
       var io = req.io
