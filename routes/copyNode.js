@@ -25,7 +25,7 @@ router.get('/',function(req,res){
 router.post('/',function(req,res){
   var copy = new Copy({
     text:req.body.text,
-    req.id
+    user:req.id
   });
   var id = req.id;
   copy.save(function(err,doc){
