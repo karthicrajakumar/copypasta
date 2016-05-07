@@ -24,7 +24,8 @@ router.get('/',function(req,res){
 
 router.post('/',function(req,res){
   var copy = new Copy({
-    text:req.body.text
+    text:req.body.text,
+    req.id
   });
   var id = req.id;
   copy.save(function(err,doc){
@@ -41,7 +42,8 @@ router.post('/',function(req,res){
 })
 router.post('/pc',function(req,res){
   var copy = new Copy({
-    text:req.body.text
+    text:req.body.text,
+    user:req.id
   });
   var id = req.id;
   copy.save(function(err,doc){

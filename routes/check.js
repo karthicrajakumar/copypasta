@@ -25,7 +25,7 @@ router.get('/',function(req,res){
 router.post('/',function(req,res){
   var url = new Url({
     url:req.body.url,
-    id:req.decoded
+    user:req.decoded
   });
   var id = req.decoded;
 
@@ -44,7 +44,7 @@ router.post('/',function(req,res){
 router.post('/pc',function(req,res){
   var url = new Url({
     url:req.body.url,
-    id:req.decoded
+    user:req.decoded
   });
   var id = req.decoded;
 

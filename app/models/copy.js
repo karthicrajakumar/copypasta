@@ -3,7 +3,8 @@ var mongoose = require('mongoose'),
 
 var CopySchema = new Schema({
   text : {type:String},
-  done:{type:Boolean,default:false}
+  done:{type:Boolean,default:false},
+  user:{type:String}
 });
 
 module.exports = mongoose.model('Copy',CopySchema);
