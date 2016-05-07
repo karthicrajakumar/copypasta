@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var Url = require('../app/models/url');
-var Copy = require('../app/models/copy')
+var Copy = require('../app/models/copy');
+var User = require('../app/models/user');
 var mongoose = require('mongoose');
 
 
